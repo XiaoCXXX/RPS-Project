@@ -21,7 +21,7 @@ try:
     s.bind((servername, port))
 except socket.error as e:
     print(e)
-s.listen()
+s.listen(3)
 while True:
     print("Ready to accept the client")
     client,addr = s.accept()
