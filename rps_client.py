@@ -8,7 +8,7 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect(('localhost', 25585))
     
 def main():
-    while True:
-        print("Connected to server.")
+    username = input('Please enter your username: ')
+    client_socket.send(username.encode())
     
 main()
