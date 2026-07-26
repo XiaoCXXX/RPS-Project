@@ -2,14 +2,17 @@ import socket
 def threaded_client(client):
     print(client)
     client.send(b"You are connected.")
-    print("Helloworld3")
     while True:
         recieved_data = client.recv(4096)
-        print("Helloworld4")
+        print("Checking if data is received:")
         if not recieved_data:
             print("The client has disconnected.")
             break
+        else: 
+            print("data received:\n")
+            print(recieved_data)
         print("Recieved data: ", recieved_data.decode())
+    print("Closing connection now")
     client.close()
 servername = "localhost"
 port = 25585
@@ -20,8 +23,8 @@ except socket.error as e:
     print(e)
 s.listen()
 while True:
-    print("Helloworld")
+    print("Ready to accept the client")
     client,addr = s.accept()
-    print("Helloworld2")
+    print("Creating a new thread")
     threaded_client(client)
 
