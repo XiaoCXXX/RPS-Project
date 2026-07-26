@@ -1,4 +1,6 @@
 import socket
+from _thread import *
+
 def threaded_client(client):
     print(client)
     client.send(b"You are connected.")
@@ -21,10 +23,9 @@ try:
     s.bind((servername, port))
 except socket.error as e:
     print(e)
-s.listen(3)
+s.listen()
 while True:
     print("Ready to accept the client")
     client,addr = s.accept()
     print("Creating a new thread")
-    threaded_client(client)
-
+    start_new_thread(threaded_client, (client,))
